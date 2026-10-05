@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão - Comissão, Estoque e Juros</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/dados.js"></script>
+  <script defer src="js/comissoes.js"></script>
+  <script defer src="js/estoque.js"></script>
+  <script defer src="js/juros.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <h1>Gestão - Comissão, Estoque e Juros</h1>
+    <nav class="abas" role="tablist" aria-label="Questões">
+      <button class="aba ativa" role="tab" id="aba-comissoes" aria-controls="painel-comissoes" aria-selected="true"> 1° Programa  - Comissões</button>
+      <button class="aba" role="tab" id="aba-estoque" aria-controls="painel-estoque" aria-selected="false" tabindex="-1">2° Programa  - Estoque</button>
+      <button class="aba" role="tab" id="aba-juros" aria-controls="painel-juros" aria-selected="false" tabindex="-1">3° Programa  - Juros</button>
+    </nav>
+  </header>
+
+  <main class="conteudo">
+    <!-- Primeiro Bloco - Comissões - Por Alisson -->
+    <section class="painel" id="painel-comissoes" role="tabpanel" aria-labelledby="aba-comissoes">
+      <h2>Comissões por vendedor</h2>
+      <p class="ajuda">Regra por venda: abaixo de R$ 100,00 = 0% de comissão; abaixo de R$ 500,00 = 1% de comissão; a partir de R$ 500,00 = 5% de comissão.</p>
+
+      <form id="form-comissoes" class="cartao" novalidate>
+        <!-- Obs: O JSON esta no arquivo dados.js -->
+        <label for="json-vendas">Inserir o JSON disponibilizado abaixo: </label>
+        <textarea id="json-vendas" rows="12" spellcheck="false"></textarea>
+        <div class="acoes">
+          <button type="submit" class="btn">Calcular</button>
+          <button type="button" class="btn btn-secundario" id="btn-restaurar-vendas">Restaurar exemplo</button>
+        </div>
+        <p class="msg erro" id="erro-comissoes" role="alert" hidden></p>
+      </form>
+
+      <div class="cartao" id="resultado-comissoes" hidden>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Vendedor</th>
+                <th class="num">Nº de vendas</th>
+                <th class="num">Total vendido</th>
+                <th class="num">Comissão</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-comissoes"></tbody>
+            <tfoot id="tfoot-comissoes"></tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Segundo Bloco - Estoque - Por Alisson -->
+    <section class="painel" id="painel-estoque" role="tabpanel" aria-labelledby="aba-estoque" hidden>
+      <h2>Movimentação de estoque</h2>
+
+      <form id="form-estoque" class="cartao grade-form" novalidate>
+        <div class="campo">
+          <label for="mov-produto">Produto</label>
+          <select id="mov-produto" required></select>
+        </div>
+        <div class="campo">
+          <label for="mov-tipo">Tipo</label>
+          <select id="mov-tipo" required>
+            <option value="Entrada">Entrada</option>
+            <option value="Saída">Saída</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="mov-qtd">Quantidade</label>
+          <input type="number" id="mov-qtd" min="1" step="1" inputmode="numeric" required>
+        </div>
+        <div class="campo campo-largo">
+          <label for="mov-descricao">Descrição da movimentação</label>
+          <input type="text" id="mov-descricao" maxlength="120" placeholder="Ex.: Compra fornecedor, Venda balcão" required>
+        </div>
+        <div class="acoes campo-largo">
+          <button type="submit" class="btn">Lançar</button>
+        </div>
+        <p class="msg campo-largo" id="msg-estoque" role="status" hidden></p>
+      </form>
+
+      <div class="cartao">
+        <h3>Estoque atual</h3>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="num">Código</th>
+                <th>Produto</th>
+                <th class="num">Estoque</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-estoque"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cartao">
+        <h3>Histórico de movimentações</h3>
+        <p class="ajuda" id="historico-vazio">Nenhuma movimentação lançada.</p>
+        <div class="tabela-wrap" id="historico-wrap" hidden>
+          <table>
+            <thead>
+              <tr>
+                <th class="num">ID</th>
+                <th>Data/hora</th>
+                <th>Produto</th>
+                <th>Tipo</th>
+                <th class="num">Qtd.</th>
+                <th>Descrição</th>
+                <th class="num">Saldo final</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-historico"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terceiro Bloco - Juros - Por Alisson -->
+    <section class="painel" id="painel-juros" role="tabpanel" aria-labelledby="aba-juros" hidden>
+      <h2>Juros por atraso</h2>
+      <p class="ajuda">Multa de 2,5% ao dia (juros simples) sobre o valor, contada em dias corridos até hoje (<span id="data-hoje"></span>).</p>
+
+      <form id="form-juros" class="cartao grade-form" novalidate>
+        <div class="campo">
+          <label for="juros-valor">Valor (R$)</label>
+          <input type="number" id="juros-valor" min="0.01" step="0.01" inputmode="decimal" required>
+        </div>
+        <div class="campo">
+          <label for="juros-vencimento">Data de vencimento</label>
+          <input type="date" id="juros-vencimento" required>
+        </div>
+        <div class="acoes campo-largo">
+          <button type="submit" class="btn">Calcular</button>
+        </div>
+        <p class="msg erro campo-largo" id="erro-juros" role="alert" hidden></p>
+      </form>
+
+      <div class="cartao resumo" id="resultado-juros" hidden>
+        <div class="resumo-item">
+          <span class="resumo-rotulo">Dias de atraso</span>
+          <span class="resumo-valor" id="res-dias"></span>
+        </div>
+        <div class="resumo-item">
+          <span class="resumo-rotulo">Juros</span>
+          <span class="resumo-valor" id="res-juros"></span>
+        </div>
+
+        <div class="resumo-item destaque">
+          <span class="resumo-rotulo">Total a pagar</span>
+          <span class="resumo-valor" id="res-total"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
