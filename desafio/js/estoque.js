@@ -3,8 +3,7 @@
 const TIPOS_MOVIMENTACAO = ['Entrada', 'Saída'];
 
 /**
- * Cria um controle de estoque a partir do JSON {estoque:[{codigoProduto, descricaoProduto, estoque}]}.
- * Os dados de entrada não são alterados (é feita uma cópia).
+* Aqui ja esta pegando automatico do JSON fornecido 
  * @returns {{itens: Array, mov: Array, lancar: Function}}
  */
 function criarEstoque(dados) {
@@ -35,7 +34,7 @@ function criarEstoque(dados) {
 
     const quantidade = Number(qtd);
     if (!Number.isInteger(quantidade) || quantidade <= 0) {
-      throw new Error('A quantidade deve ser um número inteiro maior que zero.');
+      throw new Error('A quantidade deve ser um número maior que zero.');
     }
 
     const desc = typeof descricao === 'string' ? descricao.trim() : '';
