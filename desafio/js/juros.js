@@ -1,12 +1,11 @@
-// Questão 3 - Cálculo de juros por atraso (lógica pura, sem DOM).
+// Programa 3 - Cálculo de juros por atraso (lógica pura, sem DOM).
 
-const TAXA_DIARIA = 0.025; // 2,5% ao dia
+const TAXA_DIARIA = 0.025; // Aquie esta a regra dos Juros, 2,5% ao dia
 
-const MS_POR_DIA = 24 * 60 * 60 * 1000;
+const MS_POR_DIA = 24 * 60 * 60 * 1000; 
 
 /**
  * Dias corridos entre duas datas, ignorando horário e fuso
- * (usa Date.UTC com ano/mês/dia locais para não sofrer com horário de verão).
  */
 function diasEntre(inicio, fim) {
   const a = Date.UTC(inicio.getFullYear(), inicio.getMonth(), inicio.getDate());
@@ -14,7 +13,6 @@ function diasEntre(inicio, fim) {
   return Math.round((b - a) / MS_POR_DIA);
 }
 
-/** Converte "AAAA-MM-DD" (valor de <input type="date">) em Date local. */
 function parseDataISO(texto) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(texto || ''));
   if (!m) return null;
@@ -24,11 +22,6 @@ function parseDataISO(texto) {
   return d;
 }
 
-/**
- * Fórmula dos juros — isolada para facilitar a troca.
- * Juros simples: valor × taxa × dias.
- * Para juros compostos, trocar por: valor * (Math.pow(1 + taxa, dias) - 1)
- */
 function formulaJuros(valor, taxa, dias) {
   return valor * taxa * dias;
 }
