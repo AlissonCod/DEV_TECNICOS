@@ -1,5 +1,5 @@
-// Questão 1 - Cálculo de comissões (lógica pura, sem DOM).
-// Todos os cálculos são feitos em centavos (inteiros) para evitar erros de ponto flutuante.
+// Programa 1 - Cálculo de comissões.
+
 
 /** Converte um valor em reais (número) para centavos inteiros. */
 function paraCentavos(valor) {

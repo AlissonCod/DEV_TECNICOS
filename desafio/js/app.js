@@ -199,6 +199,7 @@
     const erro = $('erro-juros');
     const resultado = $('resultado-juros');
 
+         // ===== Pra pegar a data de hoje =====
     $('data-hoje').textContent = fmtData.format(new Date());
 
     $('form-juros').addEventListener('submit', (e) => {

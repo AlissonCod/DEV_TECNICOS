@@ -29,7 +29,7 @@
 
       <form id="form-comissoes" class="cartao" novalidate>
         <!-- Obs: O JSON esta no arquivo dados.js -->
-        <label for="json-vendas">Inserir o JSON disponibilizado abaixo: </label>
+        <label for="json-vendas">JSON Abaixo disponibilizado no material: </label>
         <textarea id="json-vendas" rows="12" spellcheck="false"></textarea>
         <div class="acoes">
           <button type="submit" class="btn">Calcular</button>
@@ -127,7 +127,8 @@
     <!-- Terceiro Bloco - Juros - Por Alisson -->
     <section class="painel" id="painel-juros" role="tabpanel" aria-labelledby="aba-juros" hidden>
       <h2>Juros por atraso</h2>
-      <p class="ajuda">Multa de 2,5% ao dia (juros simples) sobre o valor, contada em dias corridos até hoje (<span id="data-hoje"></span>).</p>
+      <p class="ajuda">Multa de 2,5% ao dia sobre o valor, contada em dias corridos até hoje (<span id="data-hoje"></span>).</p>
+      <p class="ajuda">Obs: Coloque data Retroativa, exemplo: = menor que a data de hoje.</p>
 
       <form id="form-juros" class="cartao grade-form" novalidate>
         <div class="campo">
