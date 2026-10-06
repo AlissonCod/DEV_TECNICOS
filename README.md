@@ -18,3 +18,10 @@ Inicie a aplicação: Você pode visualizar o projeto executando o arquivo index
 
 Alternativa Recomendada (Live Preview):
 Para uma melhor experiência, recomendo a instalação da extensão Live Preview no VS Code. Ela cria um servidor local embutido no editor, permitindo que você visualize e interaja com o projeto em tempo real, sem a necessidade de abrir o arquivo index.html manualmente.
+
+___
+
+Tecnologias usadas
+
+HTML + CSS + JS
+--> Sem nenhum framework
