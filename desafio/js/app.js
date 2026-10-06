@@ -67,12 +67,14 @@
     });
   }
 
-  // ===== Questão 1 - Comissões =====
+  //  Programa 1 - Comissões 
   function iniciarComissoes() {
     const textarea = $('json-vendas');
     const erro = $('erro-comissoes');
     const resultado = $('resultado-comissoes');
     const exemplo = JSON.stringify(VENDAS, null, 2);
+
+    resultado.hidden = true;
 
     textarea.value = exemplo;
 
@@ -86,6 +88,18 @@
         mostrarMsg(erro, 'JSON inválido: ' + e.message, 'erro');
         return;
       }
+
+      $('form-comissoes').addEventListener('submit', (e) => {
+        e.preventDefault();
+        calcular();
+      });
+
+      $('btn-restaurar-vendas').addEventListener('click', () => {
+    textarea.value = exemplo;
+    // Opcional: Se não quiser que calcule automaticamente ao restaurar, 
+    // remova a chamada abaixo também.
+    calcular(); 
+  });
 
       let r;
       try {
@@ -130,7 +144,7 @@
     calcular();
   }
 
-  // ===== Questão 2 - Estoque =====
+  // Programa 2 - Estoque
   function iniciarEstoque() {
     const estoque = criarEstoque(ESTOQUE);
     const form = $('form-estoque');
@@ -194,7 +208,7 @@
     renderHistorico();
   }
 
-  // ===== Questão 3 - Juros =====
+  // ===== Programa 3 - Juros =====
   function iniciarJuros() {
     const erro = $('erro-juros');
     const resultado = $('resultado-juros');
