@@ -3,7 +3,8 @@ Projeto desenvolvido para calcular
 --> Controle de estoque
 --> Calculo de Juros sobre um valor e titulo ja vencido
 
-
+Obs>>>> Esse projeto não esta vinculao a um banco de dados
+todo Input fica em cache, porem ao darmos f5 para atualizar a pagina, tudo se perde...
 
 ___
 
